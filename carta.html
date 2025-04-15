@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta para Mi Amor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 10s infinite ease-in;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(1); opacity: 0; }
+      50% { opacity: 1; transform: translateY(50vh) scale(1.2); }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    @keyframes aparecer {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes desvanecer {
+      0% { opacity: 1; }
+      100% { opacity: 0; transform: scale(0.8); }
+    }
+
+    .carta {
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+      margin-top: 10vh;
+      color: #f8fcfd;
+      text-align: center;
+      animation: aparecer 1.5s ease-in-out;
+      display: none;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #0560e9;
+    }
+
+    p {
+      font-size: 1.3em;
+      line-height: 1.6;
+    }
+
+    .firma {
+      margin-top: 30px;
+      font-style: italic;
+      color: #ffcce0;
+    }
+
+    .tiempo {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      color: #ffb3c6;
+    }
+
+    .abrir-btn {
+      position: relative;
+      z-index: 2;
+      display: block;
+      margin: 35vh auto 0;
+      padding: 20px 40px;
+      font-size: 1.5em;
+      background-color: #0b4f6e;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      box-shadow: 0 0 15px rgba(3, 122, 219, 0.6);
+    }
+
+    .abrir-btn:hover {
+      background-color: #012b85;
+    }
+
+    .te-amo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      font-size: 8em;
+      font-weight: bold;
+      color: #083cc9;
+      text-shadow: 3px 3px 25px #fff;
+      opacity: 0;
+      z-index: 3;
+      animation: aparecerTeAmo 3s ease-in-out forwards;
+    }
+
+    @keyframes aparecerTeAmo {
+      0% { opacity: 0; transform: scale(0.8) translate(-50%, -50%); }
+      50% { opacity: 1; transform: scale(1.4) translate(-50%, -50%); }
+      100% { opacity: 1; transform: scale(1) translate(-50%, -50%); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="background" id="background"></div>
+
+<!-- 🎵 Audio -->
+<audio id="musica">
+  <source src="asi.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Botón -->
+<button class="abrir-btn" onclick="mostrarCarta()">Abrir carta 💌</button>
+
+<!-- Carta -->
+<div class="carta" id="carta">
+  <h1>Feliz Aniversario, Mi Amor 💖</h1>
+  <div class="tiempo">
+    Hoy celebramos <strong>4 años, 3 meses</strong> de estar juntos... <br>
+    o mejor dicho: <strong>1,556 días de amor</strong>. 💘
+  </div>
+  <p>
+    Hoy celebramos un año más de amor, y quiero agradecerle a Dios por todo este tiempo que he estado junto a ti mi amor, quiero que sigas siendo tu, solo tu. <br><br>
+    Gracias por cada momento, por cada aventura, por cada sonrisa. no quiero a otra persona que no seas tu. <br><br>
+    hemos pasado por muchas circunstancias y gracias a Dios seguimos juntos y quiero que asi siga en todo momento<br><br>
+    soy tan bendecido de tenerte a mi lado, bendecido por tener una novia hermosa y preciosa, bendecido de estar al lado de una mujer increible,y sobre todo temerosa de Dios.
+    quiero ser el hombre que te cuide y proteja en todo momento, el hombre que te haga feliz a diario y sobre todo el hombre que te mereces... asi te pedi... 
+  </p>
+  <div class="firma">Con todo mi amor, <br>wilmer </div>
+</div>
+
+<!-- Texto "TE AMO" gigante -->
+<div id="teAmo" class="te-amo" style="display: none;">TE AMO 💖</div>
+
+<script>
+  function mostrarCarta() {
+    // Ocultar botón y mostrar carta
+    document.querySelector('.abrir-btn').style.display = 'none';
+    const carta = document.getElementById('carta');
+    carta.style.display = 'block';
+
+    // Reproducir canción
+    document.getElementById('musica').play();
+
+    // Corazones
+    const background = document.getElementById('background');
+for (let i = 0; i < 150; i++) { // ¡ahora son 150 corazones!
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+  background.appendChild(heart);
+}
+
+
+    // Luego de 35 segundos
+    setTimeout(() => {
+      carta.style.animation = 'desvanecer 3s ease forwards';
+      setTimeout(() => {
+        carta.style.display = 'none';
+        document.getElementById('teAmo').style.display = 'block';
+      }, 3000);
+    }, 20000);
+  }
+</script>
+
+</body>
+</html>
